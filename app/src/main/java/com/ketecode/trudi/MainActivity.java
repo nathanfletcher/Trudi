@@ -28,7 +28,10 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
+
+                Snackbar.make(view, "Loading bus stop", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
