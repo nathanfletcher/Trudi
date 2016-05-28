@@ -14,8 +14,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public GoogleMap map;
+    public GPSTracker gps;
+    public Route circle_Lapaz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +55,27 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        gps = new GPSTracker(MainActivity.this);
+
+        loadRouteManually();
+
+    }
+
+    /**
+    * Function to get the users location. This will be plotted on the map */
+    public void getUserLocation() {
+        LatLng userLocation;
+        //getting user location
+
+        if(gps.canGetLocation()){
+            userLocation = new LatLng(gps.getLatitude(),gps.getLongitude());
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15));
+            map.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).position(userLocation).title("You").draggable(true));
+            map.animateCamera(CameraUpdateFactory.zoomTo(16), 2000, null);
+        }
+
     }
 
     @Override
@@ -102,5 +134,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * This loads the routes manually using the objects created i.e Route and Stop
+     * I'm putting it here so that the onCreate method won't be bloated
+     * the route object you're adding, it should be created as public in the class first
+     * */
+    public void loadRouteManually(){
+        circle_Lapaz.setName("Circle to Lapaz");
+        circle_Lapaz.busStops.add(new Stop("Terminal Circle", 5.56932, -0.215881));
+        circle_Lapaz.busStops.add(new Stop("Car pack",5.59145,-0.219412));
+        circle_Lapaz.busStops.add(new Stop("New Fadama",5.59966,-0.237133));
+
     }
 }
