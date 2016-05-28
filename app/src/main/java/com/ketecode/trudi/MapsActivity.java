@@ -20,7 +20,7 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    public Route circle_Lapaz;
+    public Route circle_Lapaz,americanHouse_motorway;
     List<Marker> allBusStops = new ArrayList<>();
 
     //This class deals with GPS Tracking
@@ -38,6 +38,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         gpsTracker = new GPSTracker(getApplicationContext());
         circle_Lapaz = new Route();
+        americanHouse_motorway = new Route();
 
         Toast.makeText(this,"Get to the nearest bus stop shown on the map",Toast.LENGTH_LONG);
         loadRouteManually();
@@ -75,7 +76,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(user));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 15));
 
+        //Plotting all routes bus stops on map
         plotBusStops(circle_Lapaz);
+        plotBusStops(americanHouse_motorway);
 
     }
 
@@ -85,10 +88,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * the route object you're adding, it should be created as public in the class first
      * */
     public void loadRouteManually(){
+        //adding route for circle-lapaz
         circle_Lapaz.setName("Circle to Lapaz");
-        circle_Lapaz.busStops.add(new Stop("Terminal Circle", 5.56932, -0.215881));
-        circle_Lapaz.busStops.add(new Stop("Car pack", 5.59145, -0.219412));
-        circle_Lapaz.busStops.add(new Stop("New Fadama", 5.59966, -0.237133));
+        circle_Lapaz.addBusStop(new Stop("Terminal Circle", 5.56932, -0.215881));
+        circle_Lapaz.addBusStop(new Stop("Car pack", 5.59145, -0.219412));
+        circle_Lapaz.addBusStop(new Stop("New Fadama", 5.59966, -0.237133));
+
+        //adding route for American house - Motorway
+        americanHouse_motorway.setName("American House to Motorway");
+        americanHouse_motorway.addBusStop(new Stop("Terminal Circle", 5.64304, -0.159744));
+        americanHouse_motorway.addBusStop(new Stop("Terminal Circle", 5.63872, -0.170786));
+        americanHouse_motorway.addBusStop(new Stop("Terminal Circle", 5.63626, -0.171896));
+        americanHouse_motorway.addBusStop(new Stop("Terminal Circle", 5.63409, -0.172443));
+        americanHouse_motorway.addBusStop(new Stop("Terminal Circle", 5.62803, -0.176426));
     }
 
     /**

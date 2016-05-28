@@ -51,8 +51,11 @@ public class Route {
         return busStops;
     }
 
-    public void setBusStops(List<Stop> busStops) {
-        this.busStops = busStops;
+    public void addBusStop(String name, Double lat, Double lon) {
+        busStops.add(new Stop(name, lat, lon));
     }
 
+    public void addBusStop(Stop busStopObj) {
+        busStops.add(busStopObj);
+    }
 }
