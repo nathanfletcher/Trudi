@@ -27,7 +27,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        loadRouteManually();
+        gpsTracker = new GPSTracker(getApplicationContext());
+
+        //loadRouteManually();
     }
 
 
@@ -57,9 +59,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
 
         //putting usr on map
-        mMap.addMarker(new MarkerOptions().position(user).icon(BitmapDescriptorFactory.fromFile("user.png")));
+        mMap.addMarker(new MarkerOptions().position(user));
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(user));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 15));
     }
 
     /**
