@@ -75,14 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(user));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 15));
 
-        for(int i=0; i<circle_Lapaz.getBusStops().size(); i++){
-
-            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(circle_Lapaz.getBusStops().get(i).getLatitude(), circle_Lapaz.getBusStops().get(i).getLongitude()))
-                    .title(circle_Lapaz.getBusStops().get(i).getName())
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.busiconbeta)));
-
-            allBusStops.add(marker);
-        }
+        plotBusStops(circle_Lapaz);
 
     }
 
@@ -98,7 +91,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         circle_Lapaz.busStops.add(new Stop("New Fadama", 5.59966, -0.237133));
     }
 
+    /**
+     * This method is optimised to take any route and plot all it's bus stops on the map
+     * @param theRoute The route to be plotted on the map.
+     * */
     public void plotBusStops(Route theRoute){
+        for(int i=0; i<theRoute.getBusStops().size(); i++){
 
+            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(theRoute.getBusStops().get(i).getLatitude(), theRoute.getBusStops().get(i).getLongitude()))
+                    .title(theRoute.getBusStops().get(i).getName())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.busiconbeta)));
+
+            allBusStops.add(marker);
+        }
     }
 }
