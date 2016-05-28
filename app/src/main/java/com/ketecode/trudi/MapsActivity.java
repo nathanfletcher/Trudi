@@ -1,7 +1,9 @@
 package com.ketecode.trudi;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,7 +30,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         gpsTracker = new GPSTracker(getApplicationContext());
-
+        Toast.makeText(this,"Get to the nearest bus stop shown on the map",Toast.LENGTH_LONG);
         //loadRouteManually();
     }
 
@@ -63,6 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(user));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 15));
+
+
     }
 
     /**
