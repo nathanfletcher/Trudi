@@ -40,7 +40,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         circle_Lapaz = new Route();
         americanHouse_motorway = new Route();
 
-        Toast.makeText(this,"Get to the nearest bus stop shown on the map",Toast.LENGTH_LONG);
         loadRouteManually();
     }
 
@@ -79,6 +78,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Plotting all routes bus stops on map
         plotBusStops(circle_Lapaz);
         plotBusStops(americanHouse_motorway);
+
+        Toast.makeText(this, "Get to the nearest bus stop shown on the map", Toast.LENGTH_LONG).show();
+
 
     }
 
