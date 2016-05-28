@@ -23,4 +23,5 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyDBBMqhYZiiUWoHkyVC36_HvjnbK98j_UA
     </string>
+    <string name="title_activity_recommend">Trudy Recommends</string>
 </resources>

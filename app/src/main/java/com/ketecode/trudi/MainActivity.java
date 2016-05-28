@@ -60,10 +60,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        circle_Lapaz = new Route();
-        gps = new GPSTracker(MainActivity.this);
-
-        loadRouteManually();
 
     }
 
@@ -140,15 +136,5 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    /**
-     * This loads the routes manually using the objects created i.e Route and Stop
-     * I'm putting it here so that the onCreate method won't be bloated
-     * the route object you're adding, it should be created as public in the class first
-     * */
-    public void loadRouteManually(){
-        circle_Lapaz.setName("Circle to Lapaz");
-        circle_Lapaz.busStops.add(new Stop("Terminal Circle", 5.56932, -0.215881) );
-        circle_Lapaz.busStops.add(new Stop("Car pack",5.59145,-0.219412));
-        circle_Lapaz.busStops.add(new Stop("New Fadama", 5.59966, -0.237133));
-    }
+
 }

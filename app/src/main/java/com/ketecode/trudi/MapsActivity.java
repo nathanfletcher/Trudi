@@ -11,12 +11,19 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     public Route circle_Lapaz;
+    List<Marker> allBusStops = new ArrayList<>();
+
+    //This class deals with GPS Tracking
     public GPSTracker gpsTracker;
     LatLng user;
 
@@ -30,8 +37,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         gpsTracker = new GPSTracker(getApplicationContext());
+        circle_Lapaz = new Route();
+
         Toast.makeText(this,"Get to the nearest bus stop shown on the map",Toast.LENGTH_LONG);
-        //loadRouteManually();
+        loadRouteManually();
     }
 
 
@@ -61,11 +70,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
 
         //putting usr on map
-        mMap.addMarker(new MarkerOptions().position(user));
+        mMap.addMarker(new MarkerOptions().position(user)).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.user));
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(user));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 15));
 
+        for(int i=0; i<circle_Lapaz.getBusStops().size(); i++){
+
+            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(circle_Lapaz.getBusStops().get(i).getLatitude(), circle_Lapaz.getBusStops().get(i).getLongitude()))
+                    .title(circle_Lapaz.getBusStops().get(i).getName())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.busiconbeta)));
+
+            allBusStops.add(marker);
+        }
 
     }
 
@@ -76,8 +93,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * */
     public void loadRouteManually(){
         circle_Lapaz.setName("Circle to Lapaz");
-        circle_Lapaz.busStops.add(new Stop("Terminal Circle", 5.56932, -0.215881) );
+        circle_Lapaz.busStops.add(new Stop("Terminal Circle", 5.56932, -0.215881));
         circle_Lapaz.busStops.add(new Stop("Car pack", 5.59145, -0.219412));
         circle_Lapaz.busStops.add(new Stop("New Fadama", 5.59966, -0.237133));
+    }
+
+    public void plotBusStops(Route theRoute){
+
     }
 }

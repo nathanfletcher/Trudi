@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <!--Maps permissions-->
+    <!-- Maps permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -63,7 +63,11 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ReportActivity"
-            android:label="@string/title_activity_report"></activity>
+            android:label="@string/title_activity_report" />
+        <activity
+            android:name=".RecommendActivity"
+            android:label="@string/title_activity_recommend"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
