@@ -40,11 +40,13 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(intent);
+
 
                 Snackbar.make(view, "Loading bus stop", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
             }
         });
         //GoogleMap map;
