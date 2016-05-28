@@ -24,9 +24,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public GoogleMap map;
+
     public GPSTracker gps;
     public Route circle_Lapaz;
+    public Stop sampleStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
+        //GoogleMap map;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+
+        circle_Lapaz = new Route();
         gps = new GPSTracker(MainActivity.this);
 
         loadRouteManually();
@@ -71,9 +73,9 @@ public class MainActivity extends AppCompatActivity
 
         if(gps.canGetLocation()){
             userLocation = new LatLng(gps.getLatitude(),gps.getLongitude());
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15));
+            /*map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15));
             map.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).position(userLocation).title("You").draggable(true));
-            map.animateCamera(CameraUpdateFactory.zoomTo(16), 2000, null);
+            map.animateCamera(CameraUpdateFactory.zoomTo(16), 2000, null);*/
         }
 
     }
@@ -143,9 +145,8 @@ public class MainActivity extends AppCompatActivity
      * */
     public void loadRouteManually(){
         circle_Lapaz.setName("Circle to Lapaz");
-        circle_Lapaz.busStops.add(new Stop("Terminal Circle", 5.56932, -0.215881));
+        circle_Lapaz.busStops.add(new Stop("Terminal Circle", 5.56932, -0.215881) );
         circle_Lapaz.busStops.add(new Stop("Car pack",5.59145,-0.219412));
-        circle_Lapaz.busStops.add(new Stop("New Fadama",5.59966,-0.237133));
-
+        circle_Lapaz.busStops.add(new Stop("New Fadama", 5.59966, -0.237133));
     }
 }

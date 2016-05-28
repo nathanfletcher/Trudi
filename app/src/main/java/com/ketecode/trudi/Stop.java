@@ -14,6 +14,10 @@ public class Stop {
         this.longitude = lon;
     }
 
+    public Stop() {
+
+    }
+
     public String getName() {
         return name;
     }

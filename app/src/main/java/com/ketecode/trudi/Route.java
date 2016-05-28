@@ -1,5 +1,6 @@
 package com.ketecode.trudi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,9 @@ public class Route {
     String id;
     String fromTerminal;
     String toTerminal;
-    List<Stop> busStops;
+    List<Stop> busStops = new ArrayList<Stop>();
+
+    public Route(){}
 
     public String getName() {
         return name;
@@ -51,4 +54,5 @@ public class Route {
     public void setBusStops(List<Stop> busStops) {
         this.busStops = busStops;
     }
+
 }
